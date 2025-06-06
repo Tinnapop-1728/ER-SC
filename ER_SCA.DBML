@@ -1,146 +1,6 @@
-Table Account {
-  ID int [pk]
-  External_ID__c varchar
-  Name varchar
-  ID_Card_Number__c varchar
-  PDPA_Consent_Status__c varchar
-  Account_Type__c varchar
-  PDPA_Consent_Date__c date
-  Phone_1__c varchar
-  OwnerId varchar
-  Project_Lookup__c int
-  Nationality__c int
-}
-
-Table Account_Contact_Relationship {
-  ID int [pk]
-  IsActive boolean
-  Relationship_Strength__c varchar
-  Roles varchar
-  Authorized_Person__c varchar
-  ContactId int
-  AccountId int [not null]
-}
-
-Table Activity_With_Behavior {
-  ID int [pk]
-  Activity_Key__c varchar
-  Customer_Behavior__c varchar [not null]
-}
-
-Table Billboard {
-  ID int [pk]
-  External_ID__c varchar 
-  Title__c varchar
-  Title_EN__c varchar
-  Is_Active__c varchar
-  Have_Additional_Text__c varchar
-}
-
-Table Booking_History {
-  ID int [pk]
-  Booking_Number__c varchar
-  Status__c varchar
-  Price__c decimal
-  Cancel_Type__c varchar
-  Booking_Date__c date
-  Cancel_Date__c date
-  OwnerId varchar
-  Opportunity__c int
-  Unit__c int
-  Project__c int
-}
-
-Table Budget {
-  ID int [pk]
-  External_ID__c varchar 
-  Title__c varchar
-  Title_EN__c varchar
-  Is_Active__c varchar
-  Have_Addtional_Text__c varchar
-  OwnerId varchar
-}
-
-Table Case {
-  ID varchar [pk]
-  Name varchar
-  Service_Type varchar
-  Service_Main varchar
-  Service_Sub varchar
-  Type varchar
-  DepartmentID id
-}
-
-Table Contact {
-  ID varchar [pk]
-  First_Name varchar
-  Last_Name varchar
-  Phone phone
-  Position_HR varchar
-  Type varchar
-  Employeenumber id
-}
-
-Table Company {
-  ID varchar [pk]
-  External_ID__c varchar
-  Name varchar
-  Company_Code__c varchar
-}
-
-Table Competitor_Brand {
-  ID int [pk]
-  External_ID__c varchar
-  Active__c boolean
-  Name_EN__c varchar
-  Name_TH__c varchar
-}
-
-Table Competitor_Project {
-  ID int [pk]
-  External_ID__c varchar
-  Active__c boolean
-  Name_EN__c varchar
-  Name_TH__c varchar
-  Project_Type__c varchar
-  Segment__c varchar
-  Competitor_Brand__c int [not null]
-}
-
-Table Construction_Type {
-  ID varchar [pk]
-  External_ID__c varchar 
-  name varchar
-  CRM_Code__c varchar
-}
-
-Table Country {
-  ID int [pk]
-  Country_External_ID__c varchar
-  Name varchar
-  Country_EN__c varchar
-}
-
-Table Customer_and_Co_Customer {
-  ID int [pk]
-  Name varchar
-  Relationship__c varchar
-  Type__c varchar
-  Booking_History__c int [not null]
-  Customer__c int
-  Opportunity__c int
-  OwnerID__c varchar
-}
-
-Table Customer_Behavior {
-  ID int [pk]
-  Grade_ID__c varchar
-  Name varchar
-  Customer_Grade__c varchar
-  Grade__c varchar
-  Sequence__c varchar
-}
-
+// Use DBML to define your database structure
+// Docs: https://dbml.dbdiagram.io/docs 
+//R1
 Table Delete_Restore_Data {
   ID int [pk]
   External_ID__c varchar 
@@ -152,67 +12,17 @@ Table Delete_Restore_Data {
   First_Approver__c varchar
   Second_Approver__c varchar
 }
-
-Table Department {
-  ID int [pk]
-  Name varchar
-  BU varchar 
-}
-
-Table Department_Role {
-  ID int [pk]
-  Name varchar
-  ContactID varchar 
-  DepartmentID varchar
-  Position varchar
-  SubDepartment varchar
-  SubDepartment2 varchar
-}
-
-Table District {
-  ID int [pk]
-  District_External_ID__c varchar
-  Name varchar
-  District_EN__c varchar
-  IsActive__c boolean
-  Province__c int
-}
-
-Table Employee_Temp_TRX {
-  ID int [pk]
-  External_ID__c varchar
-  Name varchar
-  Orgmain__c varchar
-  Upsert_PTM_Status__c varchar
-  Upsert_User_Status__c varchar
-  Employee_Batch_TRX__c varchar [not null]
-  User__c varchar [not null]
-  Project_Team_Member__c varchar [not null]
-}
-
-Table House_Model {
-  ID varchar [pk]
-  External_ID__c varchar 
-  Name varchar
-  Status__c varchar
-  Project__c varchar [not null]
-}
-
-Table House_Size {
-  ID varchar [pk]
-  External_ID__c varchar 
-  Name varchar
-  Construction_Type__c varchar [not null]
-}
-
-Table Income {
+Table Task {
   ID int [pk]
   External_ID__c varchar 
-  Title__c varchar
-  Title_EN_c varchar
-  Have_Additional_Text_c varchar
+  Activity_Date__c date
+  Customer_Contact_Type__c varchar
+  Opportunity__c varchar [not null]
+  Project__c varchar
+  Customer_Behavior__c varchar 
+  Whoid varchar
+  Whatid varchar
 }
-
 Table Lead {
   ID int [pk]
   External_ID__c varchar 
@@ -232,7 +42,6 @@ Table Lead {
   Project__c varchar [not null]
   Unit_Name__c varchar [not null] 
 }
-
 Table Lead_SLA_Log {
   ID int [pk]
   External_ID__c varchar 
@@ -243,173 +52,65 @@ Table Lead_SLA_Log {
   Ownerid varchar
   Lead varchar
 }
-
-Table Merge_Account_Backup {
-  ID int [pk] 
-  Name varchar
-  Merge_Customer_Approval__c varchar [not null]
-} 
-
-Table Merge_Customer_And_Co_Customer {
-  ID int [pk] 
-  Name varchar
-  Merge_Customer_Approval__c varchar [not null]
+Table Activity_With_Behavior {
+  ID int [pk]
+  Activity_Key__c varchar
+  Customer_Behavior__c varchar [not null]
 }
-
-Table Merge_Customer_Approval {
-  ID int [pk] 
+Table Customer_Behavior {
+  ID int [pk]
+  Grade_ID__c varchar
   Name varchar
-  Merge_Status__c varchar
-  Master_Record__c varchar [not null]
-  Customer_2__c varchar [not null]
-  Customer_1__c varchar [not null]
+  Customer_Grade__c varchar
+  Grade__c varchar
+  Sequence__c varchar
 }
+// Table Group {
+//   ID int [pk]
 
-Table Merge_Customer_Contact_By_Project_Backup {
-  ID int [pk] 
+//   Name varchar
+//   Developername varchar
+//   Active boolean
+//   Relatedid varchar [not null]
+// }
+Table User {
+  ID int [pk]  
   Name varchar
-  Merge_Customer_Approval__c varchar [not null]
+  Employeenumber varchar
+  Active boolean
+  Role varchar [not null]
+  Profile varchar [not null]
 }
+// Table Role {
+//   ID int [pk]
 
-Table Merge_Opportunity_Backup {
-  ID int [pk] 
-  Name varchar
-  Merge_Customer_Approval__c varchar [not null]
-}
+//   Name varchar
+//   Developername varchar
+//   Active boolean
+// }
+// Table Profile {
+//   ID int [pk]
 
-Table Merge_Questionnaire_Backup {
-  ID int [pk] 
-  Name varchar
-  Merge_Customer_Approval__c varchar
-}
+//   Name varchar
+//   Description varchar
+// }
+// Table Employee_Batch_TRX {
+//   ID int [pk]
 
-Table Merge_Task_Backup {
-  ID int [pk] 
-  Name varchar
-  Merge_Customer_Approval__c varchar [not null]
-}
-
-Table Minimum_Budget {
-  ID varchar [pk]
-  External_ID__c varchar 
-  Name varchar [not null]
-  Project__c varchar [not null]
-  Budget__c varchar [not null]
-  Unit_Constrution_Type varchar [not null]
-}
-
-Table Model_Project {
-  ID varchar [pk]
-  External_ID__c varchar 
-  Name varchar
-  Status__c varchar
-  House_Model__c varchar [not null]
-  Project__c varchar [not null]
-}
-
-Table Nationality {
+//   Name varchar
+// }
+Table Employee_Temp_TRX {
   ID int [pk]
   External_ID__c varchar
+
   Name varchar
-  Nationality_EN__c varchar
+  Orgmain__c varchar
+  Upsert_PTM_Status__c varchar
+  Upsert_User_Status__c varchar
+  Employee_Batch_TRX__c varchar [not null]
+  User__c varchar [not null]
+  Project_Team_Member__c varchar [not null]
 }
-
-Table Opportunity {
-  ID int [pk]
-  Name varchar
-  OwnerId__c varchar
-  Compettier_Brand__c int [not null]
-  Compettier_Project__c int [not null]
-  Compettier_Budget__c varchar
-  Customer_Behavior__c varchar
-  Customer_Contact_by_Project__c int
-  First_Opportunity_Behavior__c varchar
-  Project__c int
-  Unit__c int
-  Refer_Opportunity__c int [not null]
-  Questionnaire__c int [not null]
-  Questionnaire_Booking__c int [not null]
-  Questionnaire_Survey__c int [not null]
-  Questionnaire_Survey_Booking__c int [not null]
-  Customer_and_Co_Customer_Booking__c int [not null]
-}
-
-Table Path {
-  ID int [pk]
-  External_ID__c varchar
-  Title__c varchar
-  Title_EN__c varchar
-  Have_Additional_Text_c varchar
-}
-
-Table Project {
-  ID varchar [pk]
-  External_ID_c varchar 
-  Name varchar
-  Project_Name_EN__c varchar
-  Project_Code__c varchar
-  Project_Type__c varchar
-  Project_Status__c varchar
-  Company__c varchar [not null]
-}
-
-Table Project_Billboard {
-  ID int [pk]
-  External_ID__c varchar 
-  Group_Label__c varchar
-  Group_Label_EN__c varchar
-  Group_Name__c varchar
-  Is_Active__c varchar
-  Sequence__c varchar
-  Billboard__c varchar
-  Project__c varchar [not null]
-}
-
-Table Project_Budget {
-  ID int [pk]
-  External_ID__c varchar 
-  Group_Label__c varchar
-  Group_Label_EN__c varchar
-  Group_Name__c varchar
-  Is_Active__c varchar
-  Sequence__c varchar
-  OwnerId varchar
-  Budget__c varchar
-  Project__c varchar [not null]
-}
-
-Table Project_Building {
-  ID varchar [pk]
-  External_ID__c varchar 
-  Name varchar
-  Status__c varchar
-  Project__c varchar [not null]
-}
-
-Table Project_Income {
-  ID int [pk]
-  External_ID__c varchar 
-  Group_Label__c varchar
-  Group_Label_EN__c varchar
-  Group_Name__c varchar
-  Is_Active__c varchar
-  Sequence__c varchar
-  Income__c varchar [not null]
-  Project__c varchar [not null]
-}
-
-Table Project_Path {
-  ID int [pk]
-  External_ID__c varchar 
-  Group_Label__c varchar
-  Group_Label_EN__c varchar
-  Group_Name__c varchar
-  Is_Active__c varchar
-  Sequence__c varchar
-  Path__c varchar
-  Project__c varchar [not null]
-}
-
 Table Project_Team_Member {
   ID int [pk]
   External_ID__c varchar 
@@ -420,20 +121,99 @@ Table Project_Team_Member {
   Approver_2__c varchar
   Project_Member__c varchar
   Project__c varchar
-  ContactID id
-  Type verchar
 }
-
-Table Project_Zone_Area {
-  ID int [pk]
+//R2
+Table Company {
+  ID varchar [pk]
+  External_ID__c varchar
+  Name varchar
+  Company_Code__c varchar
+}
+Table Minimum_Budget {
+  ID varchar [pk]
+  External_ID__c varchar 
+  Name varchar [not null]
+  Project__c varchar [not null]
+  Budget__c varchar [not null]
+  Unit_Constrution_Type varchar [not null]
+}
+Table House_Model {
+  ID varchar [pk]
   External_ID__c varchar 
   Name varchar
-  Project_Zone__c varchar
-  Project__c varchar 
-  Province__c varchar  
-  District__c varchar  
+  Status__c varchar
+  Project__c varchar [not null]
 }
+Table Model_Project {
+  ID varchar [pk]
+  External_ID__c varchar 
+  Name varchar
+  Status__c varchar
+  House_Model__c varchar [not null]
+  Project__c varchar [not null]
+}
+Table House_Size {
+  ID varchar [pk]
+  External_ID__c varchar 
+  Name varchar
+  Construction_Type__c varchar [not null]
+}
+Table Construction_Type {
+  ID varchar [pk]
+  External_ID__c varchar 
+  name varchar
+  CRM_Code__c varchar
+}  
+Table Project_Building {
+  ID varchar [pk]
+  External_ID__c varchar 
+  Name varchar
+  Status__c varchar
+  Project__c varchar [not null]
+}
+Table Unit_Information {
+  ID varchar [pk]
+  External_ID__c varchar 
+  Name varchar
+  Is_Close_Cost__c varchar
+  Is_Close_Cose_Approved__c varchar
+  Is_Lock varchar
+  Booking_Status__c varchar [not null]
+  Status_c varchar [not null]
+  House_Model__c varchar [not null]
+  House_Size__c varchar [not null]
+  Project__c varchar
+  Unit_Type__c varchar [not null]
+  Project_Building__c varchar [not null]
 
+}
+// Table Record_Type {
+//   ID varchar [pk]
+//   Name varchar
+// }
+Table Project {
+  ID varchar [pk]
+  External_ID_c varchar 
+  Name varchar
+  Project_Name_EN__c varchar
+  Project_Code__c varchar
+  Project_Type__c varchar
+  Project_Status__c varchar
+  Company__c varchar [not null]
+}
+ //L1
+Table Nationality {
+  ID int [pk]
+  External_ID__c varchar
+  Name varchar
+  Nationality_EN__c varchar
+}
+Table Country {
+  ID int [pk]
+  Country_External_ID__c varchar
+  Name varchar
+  Country_EN__c varchar
+}
 Table Province {
   ID int [pk]
   Province_External_ID__c varchar
@@ -442,50 +222,59 @@ Table Province {
   IsActive__c boolean
   Country_ID__c int
 }
-
-Table Question {
+Table District {
   ID int [pk]
-  External_ID__c varchar 
-  IsActive__c varchar
-  Section_Name__c varchar
-  Section_Name_EN__c varchar
-  Question__c varchar
-  Question_EN__c varchar
-  Question_Type__c varchar
-  Sequence__c varchar
-  Question_Set__c varchar [not null]
+  District_External_ID__c varchar
+  Name varchar
+  District_EN__c varchar
+  IsActive__c boolean
+  Province__c int
 }
-
-Table Question_Choice {
+Table Sub_District {
+  ID int [pk]
+  Sub_District_External_ID__c varchar
+  Name varchar
+  Sub_District_EN__c varchar
+  IsActive__c boolean
+  Province__c int
+  District__c int [not null]
+}
+Table Account {
   ID int [pk]
   External_ID__c varchar
-  IsActive__c varchar
-  Gropp_Label__c varchar
-  Group_Label_EN__c varchar
-  Group_Name__c varchar
-  Image_URL__c varchar
-  Sequence__c varchar
-  Value__c varchar
-  Question__c varchar
+  Name varchar
+  ID_Card_Number__c varchar
+  PDPA_Consent_Status__c varchar
+  Account_Type__c varchar
+  PDPA_Consent_Date__c date
+  Phone_1__c varchar
+  OwnerId varchar // Assuming this is an ID, adjust type if needed
+  Project_Lookup__c int // Assuming this is a FK to a Project table
+  Nationality__c int
 }
-
-Table Question_Set {
+Table Account_Contact_Relationship {
   ID int [pk]
-  External_ID_c varchar
-  IsActive__c varchar
-  Description__c varchar
-  Section_Name_EN__c varchar
-  Language__c varchar
-  No_Set_Question__c varchar
-  Question_Set_Type__c varchar
-  Project__c varchar
+  IsActive boolean
+  Relationship_Strength__c varchar
+  Roles varchar
+  Authorized_Person__c varchar
+  ContactId int // Assuming this is a FK to a Contact table
+  AccountId int [not null]
 }
-
+// Table Customer_Contact_By_Project {
+//   ID int [pk]
+//   External_ID__c varchar
+//   No_Email__c boolean
+//   No_TEL__c boolean
+//   Special__Purpose_c varchar
+//   Customer__c int // Assuming this is a FK to Account or Customer
+//   Project__c int // Assuming this is a FK to a Project table
+// }
 Table Questionnaire {
   ID int [pk]
   External_ID__c varchar
   Name varchar
-  Age__c int
+  Age__c int // Assuming Age is an integer
   Contact_Address_Text__c varchar
   Work_Address_Text__c varchar [not null]
   Customer__c int
@@ -502,7 +291,171 @@ Table Questionnaire {
   Work_Sub_District__c int [not null]
   Question_Set__c int
 }
+Table Temporary_Zapier_Lead {
+  ID int [pk]
+  Name varchar
+  Created_to_Lead__c varchar
+}
+Table Temp_Lead_Customer {
+  ID int [pk]
+  Name varchar
+  Customer__c int
+  Lead__c int
+  National_Lookup picklist [not null]
+}
+Table Competitor_Brand {
+  ID int [pk]
+  External_ID__c varchar
+  Active__c boolean
+  Name_EN__c varchar
+  Name_TH__c varchar
+}
+Table Temp_Questionnaire {
+  ID int [pk]
+  Name varchar [not null]
+  Questionnaire__c int
+  Temporary_Lead_Customer__c int
+}
+Table Competitor_Project {
+  ID int [pk]
+  External_ID__c varchar
+  Active__c boolean
+  Name_EN__c varchar
+  Name_TH__c varchar
+  Project_Type__c varchar
+  Segment__c varchar
+  Competitor_Brand__c int [not null]
+}
+Table Booking_History {
+  ID int [pk]
+  Booking_Number__c varchar
+  Status__c varchar
+  Price__c decimal // Assuming price can have decimals
+  Cancel_Type__c varchar
+  Booking_Date__c date
+  Cancel_Date__c date
+  OwnerId varchar // Assuming OwnerId is a string ID
+  Opportunity__c int
+  Unit__c int
+  Project__c int
+}
+Table Opportunity {
+  ID int [pk]
+  Name varchar
+  OwnerId__c varchar // Assuming OwnerId is a string ID
+  Compettier_Brand__c int [not null]
+  Compettier_Project__c int [not null]
+  Compettier_Budget__c varchar // Assuming budget could be a string or decimal
+  Customer_Behavior__c varchar
+  Customer_Contact_by_Project__c int
+  First_Opportunity_Behavior__c varchar
+  Project__c int
+  Unit__c int
+  Refer_Opportunity__c int [not null]
+  Questionnaire__c int [not null]
+  Questionnaire_Booking__c int [not null]
+  Questionnaire_Survey__c int [not null]
+  Questionnaire_Survey_Booking__c int [not null]
+  Customer_and_Co_Customer_Booking__c int [not null]
+}
+Table Customer_and_Co_Customer {
+  ID int [pk]
+  Name varchar
+  Relationship__c varchar
+  Type__c varchar
+  Booking_History__c int [not null]
+  Customer__c int
+  Opportunity__c int
+  OwnerID__c varchar // Assuming OwnerID is a string ID
+}
+//L2
+Table Budget {
+  ID int [pk]
+  External_ID__c varchar 
+  Title__c varchar
+  Title_EN__c varchar
+  Is_Active__c varchar
+  Have_Addtional_Text__c varchar
+  OwnerId varchar
+}  
+Table Billboard {
+  ID int [pk]
+  External_ID__c varchar 
+  Title__c varchar
+  Title_EN__c varchar
+  Is_Active__c varchar
+  Have_Additional_Text__c varchar
+}
 
+Table Income {
+  ID int [pk]
+  External_ID__c varchar 
+  Title__c varchar
+  Title_EN_c varchar
+  Have_Additional_Text_c varchar
+}
+Table Path {
+  ID int [pk]
+  External_ID__c varchar
+  
+  Title__c varchar
+  Title_EN__c varchar
+  Have_Additional_Text_c varchar
+}
+Table Project_Zone_Area {
+  ID int [pk]
+  External_ID__c varchar 
+  Name varchar
+  Project_Zone__c varchar
+  Project__c varchar 
+  Province__c varchar  
+  District__c varchar  
+}
+Table Project_Budget {
+  ID int [pk]
+  External_ID__c varchar 
+  Group_Label__c varchar
+  Group_Label_EN__c varchar
+  Group_Name__c varchar
+  Is_Active__c varchar
+  Sequence__c varchar
+  OwnerId varchar
+  Budget__c varchar
+  Project__c varchar [not null]
+}
+Table Project_Billboard {
+  ID int [pk]
+  External_ID__c varchar 
+  Group_Label__c varchar
+  Group_Label_EN__c varchar
+  Group_Name__c varchar
+  Is_Active__c varchar
+  Sequence__c varchar
+  Billboard__c varchar
+  Project__c varchar [not null]
+}
+Table Project_Income {
+  ID int [pk]
+  External_ID__c varchar 
+  Group_Label__c varchar
+  Group_Label_EN__c varchar
+  Group_Name__c varchar
+  Is_Active__c varchar
+  Sequence__c varchar
+  Income__c varchar [not null]
+  Project__c varchar [not null]
+}
+Table Project_Path {
+  ID int [pk]
+  External_ID__c varchar 
+  Group_Label__c varchar
+  Group_Label_EN__c varchar
+  Group_Name__c varchar
+  Is_Active__c varchar
+  Sequence__c varchar
+  Path__c varchar
+  Project__c varchar [not null]
+}
 Table Questionnaire_Answer {
   ID int [pk]
   External_ID__c varchar 
@@ -523,76 +476,82 @@ Table Questionnaire_Answer {
   Related_Answer_2__c varchar [not null]
   Unit_Information__c varchar
 }
-
-Table Sub_District {
-  ID int [pk]
-  Sub_District_External_ID__c varchar
+Table Merge_Customer_Approval {
+  ID int [pk] 
   Name varchar
-  Sub_District_EN__c varchar
-  IsActive__c boolean
-  Province__c int
-  District__c int [not null]
+  Merge_Status__c varchar
+  Master_Record__c varchar [not null]
+  Customer_2__c varchar [not null]
+  Customer_1__c varchar [not null]
+} 
+Table Merge_Account_Backup {
+  ID int [pk] 
+  Name varchar
+  Merge_Customer_Approval__c varchar [not null]
+} 
+Table Merge_Customer_Contact_By_Project_Backup {
+  ID int [pk] 
+  Name varchar
+  Merge_Customer_Approval__c varchar [not null]
 }
+Table Merge_Customer_and_Co_Customer {
+  ID int [pk] 
+  Name varchar
+  Merge_Customer_Approval__c varchar [not null]
+}
+Table Merge_Opportunity_Backup {
+  ID int [pk] 
+  Name varchar
+  Merge_Customer_Approval__c varchar [not null]
+}
+Table Merge_Questionnaire_Backup {
+  ID int [pk] 
+  Name varchar
+  Merge_Customer_Approval__c varchar
+}
+Table Merge_Task_Backup {
+  ID int [pk] 
+  Name varchar
+  Merge_Customer_Approval__c varchar [not null]
+}
+Table Question_Set {
+  ID int [pk]
+  External_ID_c varchar
 
-Table Task {
+  IsActive__c varchar
+  Description__c varchar
+  Section_Name_EN__c varchar
+  Language__c varchar
+  No_Set_Question__c varchar
+  Question_Set_Type__c varchar
+  Project__c varchar
+}
+Table Question {
   ID int [pk]
   External_ID__c varchar 
-  Activity_Date__c date
-  Customer_Contact_Type__c varchar
-  Opportunity__c varchar [not null]
-  Project__c varchar
-  Customer_Behavior__c varchar 
-  Whoid varchar
-  Whatid varchar
-}
-
-Table Temp_Lead_Customer {
+  IsActive__c varchar
+  Section_Name__c varchar
+  Section_Name_EN__c varchar
+  Question__c varchar
+  Question_EN__c varchar
+  Question_Type__c varchar
+  Sequence__c varchar
+  Question_Set__c varchar [not null]
+} 
+Table Question_Choice {
   ID int [pk]
-  Name varchar
-  Customer__c int
-  Lead__c int
-  National_Lookup picklist [not null]
-}
-
-Table Temp_Questionnaire {
-  ID int [pk]
-  Name varchar [not null]
-  Questionnaire__c int
-  Temporary_Lead_Customer__c int
-}
-
-Table Temporary_Zapier_Lead {
-  ID int [pk]
-  Name varchar
-  Created_to_Lead__c varchar
-}
-
-Table Unit_Information {
-  ID varchar [pk]
   External_ID__c varchar 
-  Name varchar
-  Is_Close_Cost__c varchar
-  Is_Close_Cose_Approved__c varchar
-  Is_Lock varchar
-  Booking_Status__c varchar [not null]
-  Status_c varchar [not null]
-  House_Model__c varchar [not null]
-  House_Size__c varchar [not null]
-  Project__c varchar
-  Unit_Type__c varchar [not null]
-  Project_Building__c varchar [not null]
+  IsActive__c varchar
+  Gropp_Label__c varchar
+  Group_Label_EN__c varchar
+  Group_Name__c varchar
+  Image_URL__c varchar
+  Sequence__c varchar
+  Value__c varchar
+  Question__c varchar
 }
-
-Table User {
-  ID int [pk]  
-  Name varchar
-  Employeenumber varchar
-  Active boolean
-  Role varchar [not null]
-  Profile varchar [not null]
-}
-
 //line _____________________________________________________________________
+
 Ref: Delete_Restore_Data.lead__c > Lead.ID // many-to-one
 Ref: Lead.First_Lead_Behavior__c > Customer_Behavior.ID // many-to-one
 Ref: Lead.Ownerid > Project_Team_Member.Approver_1__c // many-to-one
@@ -612,27 +571,37 @@ Ref: Lead.Lead_Behavior__c > Customer_Behavior.ID
 Ref: Task.Customer_Behavior__c - Activity_With_Behavior.Customer_Behavior__c
 Ref: Lead.ID > Lead_SLA_Log.Lead
 Ref: User.ID > Lead_SLA_Log.Ownerid  
+ 
+ 
+ 
+
 Ref: Budget.ID > Project_Budget.Budget__c
 Ref: Billboard.ID > Project_Billboard.Billboard__c
 Ref: Income.ID > Project_Income.Income__c
 Ref: Merge_Account_Backup.Merge_Customer_Approval__c > Merge_Customer_Approval.ID
 Ref: Merge_Customer_Contact_By_Project_Backup.Merge_Customer_Approval__c > Merge_Customer_Approval.ID
-Ref: Merge_Customer_And_Co_Customer.Merge_Customer_Approval__c > Merge_Customer_Approval.ID
+Ref: Merge_Customer_and_Co_Customer.Merge_Customer_Approval__c > Merge_Customer_Approval.ID
 Ref: Merge_Opportunity_Backup.Merge_Customer_Approval__c > Merge_Customer_Approval.ID
 Ref: Merge_Task_Backup.Merge_Customer_Approval__c > Merge_Customer_Approval.ID
 Ref: Questionnaire_Answer.Question__c < Question.ID
 Ref: Questionnaire_Answer.Question_Choice__c < Question_Choice.ID
+
 Ref: Question_Choice.Question__c < Question_Choice.ID
 Ref: Question_Choice.Question__c < Question.ID
+
 Ref: Questionnaire_Answer.Project_Budget__c < Project_Budget.ID
 Ref: Questionnaire_Answer.Project_Billboard__c < Project_Billboard.ID
 Ref: Questionnaire_Answer.Project_Income__c < Project_Income.ID
 Ref: Questionnaire_Answer.Project_Path__c < Project_Path.ID
+
 Ref: Questionnaire_Answer.Related_Answer_1__c > Questionnaire_Answer.ID
 Ref: Questionnaire_Answer.Related_Answer_2__c > Questionnaire_Answer.ID  
 // Ref : Opportunity.Customer_Contact_by_Project__c < Customer_Contact_By_Project.ID
 Ref : Opportunity.Customer_and_Co_Customer_Booking__c < Customer_and_Co_Customer.ID
+
 // Ref : Customer_Contact_By_Project.Project__c < Project.ID
+
+
 // __________________________________Pele
 Ref : Country.ID > Province.Country_ID__c
 Ref : Province.ID > Sub_District.Province__c
@@ -640,6 +609,7 @@ Ref : Province.ID > District.Province__c
 Ref : Nationality.ID > Account.Nationality__c
 Ref : Nationality.ID < Temp_Lead_Customer.National_Lookup
 Ref : Account.ID < Account_Contact_Relationship.AccountId
+
 Ref : Questionnaire.ID < Opportunity.Questionnaire__c
 Ref : Questionnaire.ID < Opportunity.Questionnaire_Booking__c
 Ref : Questionnaire.ID < Opportunity.Questionnaire_Survey__c
@@ -665,6 +635,7 @@ Ref : House_Model.ID < Unit_Information.House_Model__c
 Ref : House_Model.ID < Unit_Information.Unit_Type__c
 Ref : House_Model.ID < Minimum_Budget.Unit_Constrution_Type
 //-----------------connect--------------------
+
 Ref : Account.Project_Lookup__c < Project.ID
 Ref : Account.ID < Merge_Customer_Approval.Master_Record__c
 Ref : Account.ID < Merge_Customer_Approval.Customer_2__c
@@ -687,14 +658,22 @@ Ref : Minimum_Budget.Project__c > Project.ID
 Ref : Project_Building.Project__c > Project.ID
 Ref : Project_Building.ID < Unit_Information.Project_Building__c
 Ref : Model_Project.Project__c > Project.ID
+
+
+
+
+
 // ________________________________
+
 Ref : Question.Question_Set__c > Question_Set.ID
+
 Ref : Competitor_Project.ID < Lead.Compettier_Project__c
 Ref : Competitor_Brand.ID < Lead.Compettier_Brand__c
 Ref : Unit_Information.ID > Lead.Unit_Name__c
 Ref : Lead.Compettier_Budget__c > Budget.ID
 Ref : Budget.ID < Minimum_Budget.Budget__c
 // Ref : Unit_Information.ID < Unit_Information.Merge_On_Unit
+
 Ref: "Questionnaire"."Customer__c" < "Questionnaire"."Work_Address_Text__c"
 Ref : District.ID < Sub_District.District__c
 Ref : Questionnaire.Work_District__c > District.ID
@@ -708,9 +687,14 @@ Ref : Questionnaire.Contact_Country__c > Country.ID
 Ref : Questionnaire.Contact_Sub_District__c > Sub_District.ID
 Ref : Questionnaire.Work_Province__c > Province.ID
 Ref : Questionnaire.Contact_Province__c > Province.ID
-Ref : Case.DepartmentID > Department.ID
-Ref : Department_Role.DepartmentID > Department.ID
-Ref : Department_Role.ContactID - Contact.ID
-Ref : Contact.Employeenumber - User.Employeenumber
-Ref : Contact.ID < Project_Team_Member.ContactID
-Ref : Project.ID < Project_Team_Member.Project__c
+
+
+
+
+
+
+
+
+
+
+  
